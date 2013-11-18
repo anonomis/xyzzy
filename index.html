@@ -1,0 +1,109 @@
+<html>
+<head>
+  <title>Learning WebGL — lesson 1</title>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+  <script type="text/javascript" src="node_modules/underscore/underscore-min.js"></script>
+  <script type="text/javascript" src="jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+  <script type="text/javascript" src="webgl-utils.js"></script>
+  <style type="text/css"></style>
+
+  <script id="shader-fs" type="x-shader/x-fragment">
+      precision mediump float;
+
+      varying vec4 vColor; //color
+
+      void main(void) {
+        gl_FragColor = vColor;
+      }
+
+
+  </script>
+
+  <script id="shader-vs" type="x-shader/x-vertex">
+    attribute vec3 aVertexPosition;
+    attribute vec4 aVertexColor;
+
+    uniform mat4 uMVMatrix;
+    uniform mat4 uPMatrix;
+
+    varying vec4 vColor;
+
+    void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+
+        //color
+        vColor = aVertexColor;
+    }
+
+
+  </script>
+
+
+  <script src="script.js" type="text/javascript">
+
+  </script>
+
+
+  <script>window["_GOOG_TRANS_EXT_VER"] = "1";</script>
+
+  <style>
+
+    html {
+      background-color: #111;
+      font-family: "ProFontWindows";
+      color: #666;
+      overflow: hidden;
+      margin: 0;
+      user-select: none;
+
+    }
+    * {
+      user-select: none;
+    }
+    body{
+      margin: 0;
+    }
+
+    #ctrl{
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .selectBox{
+      padding: 10px;
+      margin: 1px;
+      background-color: black;
+      cursor: pointer;
+    }
+
+    .selectBox[val="1"]{
+      background-color: #009900;
+      cursor: pointer;
+    }
+    .selectBox[val="-1"]{
+      background-color: maroon;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+
+<body >
+<canvas id="canvas" style="border: none;" width="824" height="400"></canvas>
+
+<div style="margin: 10px;">
+<p id="fps"></p>v3.5.9<div id="ctrl"></div>
+</div>
+
+
+
+<script type="text/javascript">
+  console.log("canvas", canvas);
+  webGLStart();
+</script>
+
+</body>
+</html>
